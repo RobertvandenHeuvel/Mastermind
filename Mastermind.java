@@ -20,11 +20,23 @@ public class Mastermind {
 			if (checkCode == false) {
 				System.out.println("Verkeerde code. Probeer het nog een keer");
 			}
-			ci.checkEersteLetter(ingaveCharArray[0], code[0]);
+			boolean checkEersteLetter = ci.checkLetter(ingaveCharArray[0], code[0]);
+			if(checkEersteLetter == true) {
+				System.out.println("De eerste letter matcht.");
+			}
+			boolean checkTweedeLetter = ci.checkLetter(ingaveCharArray[1], code[1]);
+			if(checkTweedeLetter == true) {
+				System.out.println("De tweede letter matcht.");
+			}
+			boolean checkDerdeLetter = ci.checkLetter(ingaveCharArray[2], code[2]);
+			if(checkDerdeLetter == true) {
+				System.out.println("De derde letter matcht.");
+			}
+			boolean checkVierdeLetter = ci.checkLetter(ingaveCharArray[3], code[3]);
+			if(checkVierdeLetter == true) {
+				System.out.println("De vierde letter matcht.");
+			}
 		}
-			//if(checkEersteLetter == true) {
-			//			
-			//				}
 		System.out.println("Gefeliciteerd, je hebt de code gekraakt!");
 		
 
@@ -69,12 +81,11 @@ class CheckIngave{
 		char[] ingaveChar = ingave.toCharArray();
 		return ingaveChar;
 	}
-	boolean checkEersteLetter(char a, char b){
-		boolean checkEersteLetter = false;
+	boolean checkLetter(char a, char b){
+		boolean checkLetter = false;
 		if (a == b) {
-			checkEersteLetter = true;
-			System.out.println("De eerste letter is een match.");
+			checkLetter = true;
 		}
-		return checkEersteLetter;
+		return checkLetter;
 	}
 }
