@@ -8,6 +8,7 @@ public class Mastermind {
 		CheckIngave ci = new CheckIngave();
 		Scanner scanner = new Scanner(System.in);
 		String ingave = "";
+		boolean checkLetter;
 		char[] code = cm.data();
 		String codeString = cm.code();
 		boolean checkCode = ci.checkCode(ingave, cm.code());
@@ -20,21 +21,11 @@ public class Mastermind {
 			if (checkCode == false) {
 				System.out.println("Verkeerde code. Probeer het nog een keer");
 			}
-			boolean checkEersteLetter = ci.checkLetter(ingaveCharArray[0], code[0]);
-			if(checkEersteLetter == true) {
-				System.out.println("De eerste letter matcht.");
-			}
-			boolean checkTweedeLetter = ci.checkLetter(ingaveCharArray[1], code[1]);
-			if(checkTweedeLetter == true) {
-				System.out.println("De tweede letter matcht.");
-			}
-			boolean checkDerdeLetter = ci.checkLetter(ingaveCharArray[2], code[2]);
-			if(checkDerdeLetter == true) {
-				System.out.println("De derde letter matcht.");
-			}
-			boolean checkVierdeLetter = ci.checkLetter(ingaveCharArray[3], code[3]);
-			if(checkVierdeLetter == true) {
-				System.out.println("De vierde letter matcht.");
+			for (int i=0; i<4; i++) {
+				checkLetter = ci.checkLetter(ingaveCharArray[i], code[i]);
+				if (checkLetter == true) {
+					System.out.println("De " + (i+1) + "e letter is correct.");
+				}
 			}
 		}
 		System.out.println("Gefeliciteerd, je hebt de code gekraakt!");
