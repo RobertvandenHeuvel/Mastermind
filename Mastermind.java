@@ -28,25 +28,28 @@ public class Mastermind {
 				break;
 			default:
 				char[] ingaveCharArray = ci.ingaveNaarChar(ingave);
+				char[] codeKopie = code;
 				checkCode = ci.checkCode(ingave, cm.code());
 				for (int i=0; i<ingaveCharArray.length; i++) {
-					for (int j=0; j<code.length; j++) {
-						checkLetter = ci.checkLetter(ingaveCharArray[i], code[j]);
-						System.out.println("check " + ingaveCharArray[i] + " " + code[j]);
-						System.out.println(checkLetter);
-						if (checkLetter == true) {
-							aantalCorrecteLettersTotaal++;
+					for (int j=0; j<codeKopie.length; j++) {
+						checkLetter = ci.checkLetter(ingaveCharArray[i], codeKopie[j]);
+						System.out.println("check " + ingaveCharArray[i] + " " + codeKopie[j]);
+						System.out.println("initial: " + checkLetter);
+						if (checkLetter == true && i == j) {
+							aantalCorrecteLettersJuistePlek++;
+							ingaveCharArray[i] = 'L';
+							codeKopie[j] = 'I';
 						}
 						if (checkLetter == true && i != j) {
+							aantalLettersVerkeerdePlek++;
 							checkLetter = false;
+							ingaveCharArray[i] = 'L';
+							codeKopie[j] = 'I';
 						}
 						System.out.println("correction: " + checkLetter);
-						if (checkLetter == true) {
-							aantalCorrecteLettersJuistePlek++;
-						}
 						
 					}
-					aantalLettersVerkeerdePlek = aantalCorrecteLettersTotaal - aantalCorrecteLettersJuistePlek;
+				//	aantalLettersVerkeerdePlek = aantalCorrecteLettersTotaal - aantalCorrecteLettersJuistePlek;
 			}
 				System.out.println(aantalCorrecteLettersJuistePlek +" letter(s) staan op de juiste plek.");
 				System.out.println(aantalLettersVerkeerdePlek + " letter(s) staan op de verkeerde plek.");
