@@ -18,8 +18,8 @@ public class Mastermind {
 		System.out.println("Voer in (q) om te stoppen.");
 		while(checkCode == false) {
 			int aantalCorrecteLettersJuistePlek = 0;
-			int aantalCorrecteLettersTotaal = 0;
 			int aantalLettersVerkeerdePlek = 0;
+			char[] codeKopie = code;
 			ingave = scanner.nextLine();
 			switch(ingave) {
 			case "q":
@@ -28,10 +28,10 @@ public class Mastermind {
 				break;
 			default:
 				char[] ingaveCharArray = ci.ingaveNaarChar(ingave);
-				char[] codeKopie = code;
-				checkCode = ci.checkCode(ingave, cm.code());
+				checkCode = ci.checkCode(ingave, codeString);
 				for (int i=0; i<ingaveCharArray.length; i++) {
 					for (int j=0; j<codeKopie.length; j++) {
+
 						checkLetter = ci.checkLetter(ingaveCharArray[i], codeKopie[j]);
 						System.out.println("check " + ingaveCharArray[i] + " " + codeKopie[j]);
 						System.out.println("initial: " + checkLetter);
@@ -49,7 +49,6 @@ public class Mastermind {
 						System.out.println("correction: " + checkLetter);
 						
 					}
-				//	aantalLettersVerkeerdePlek = aantalCorrecteLettersTotaal - aantalCorrecteLettersJuistePlek;
 			}
 				System.out.println(aantalCorrecteLettersJuistePlek +" letter(s) staan op de juiste plek.");
 				System.out.println(aantalLettersVerkeerdePlek + " letter(s) staan op de verkeerde plek.");
@@ -58,7 +57,6 @@ public class Mastermind {
 		}
 		System.out.println("Gefeliciteerd, je hebt de code gekraakt!");
 		
-
 	}
 
 }
