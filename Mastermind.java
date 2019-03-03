@@ -9,6 +9,7 @@ public class Mastermind {
 		Scanner scanner = new Scanner(System.in);
 		String ingave = "";
 		boolean checkLetter;
+		boolean bevatLetter;
 		char[] code = cm.data();
 		String codeString = cm.code();
 		boolean checkCode = ci.checkCode(ingave, cm.code());
@@ -16,7 +17,9 @@ public class Mastermind {
 		System.out.println("Welkom bij Mastermind. Je moet de code kraken. Voer een combinatie van a-f, vier letters lang (bijv. edcc) in.");
 		System.out.println("Voer in (q) om te stoppen.");
 		while(checkCode == false) {
-			int aantalCorrecteLetters = 0;
+			int aantalCorrecteLettersJuistePlek = 0;
+			int aantalCorrecteLettersTotaal = 0;
+			int aantalLettersVerkeerdePlek = 0;
 			ingave = scanner.nextLine();
 			switch(ingave) {
 			case "q":
@@ -27,12 +30,26 @@ public class Mastermind {
 				char[] ingaveCharArray = ci.ingaveNaarChar(ingave);
 				checkCode = ci.checkCode(ingave, cm.code());
 				for (int i=0; i<ingaveCharArray.length; i++) {
-					checkLetter = ci.checkLetter(ingaveCharArray[i], code[i]);
-					if (checkLetter == true) {
-						aantalCorrecteLetters++;
+					for (int j=0; j<code.length; j++) {
+						checkLetter = ci.checkLetter(ingaveCharArray[i], code[j]);
+						System.out.println("check " + ingaveCharArray[i] + " " + code[j]);
+						System.out.println(checkLetter);
+						if (checkLetter == true) {
+							aantalCorrecteLettersTotaal++;
+						}
+						if (checkLetter == true && i != j) {
+							checkLetter = false;
+						}
+						System.out.println("correction: " + checkLetter);
+						if (checkLetter == true) {
+							aantalCorrecteLettersJuistePlek++;
+						}
+						
 					}
-				}
-				System.out.println(aantalCorrecteLetters +" letter(s) staan op de juiste plek.");
+					aantalLettersVerkeerdePlek = aantalCorrecteLettersTotaal - aantalCorrecteLettersJuistePlek;
+			}
+				System.out.println(aantalCorrecteLettersJuistePlek +" letter(s) staan op de juiste plek.");
+				System.out.println(aantalLettersVerkeerdePlek + " letter(s) staan op de verkeerde plek.");
 				break;
 			}
 		}
