@@ -13,19 +13,27 @@ public class Mastermind {
 		String codeString = cm.code();
 		boolean checkCode = ci.checkCode(ingave, cm.code());
 		System.out.println(codeString);
-		System.out.println("Welkom bij Mastermind. Je moet de code kraken. Typ een combinatie van a-f, vier letters lang (bijv. edcc).");
+		System.out.println("Welkom bij Mastermind. Je moet de code kraken. Voer een combinatie van a-f, vier letters lang (bijv. edcc) in.");
+		System.out.println("Voer in (q) om te stoppen.");
 		while(checkCode == false) {
+			int aantalCorrecteLetters = 0;
 			ingave = scanner.nextLine();
-			char[] ingaveCharArray = ci.ingaveNaarChar(ingave);
-			checkCode = ci.checkCode(ingave, cm.code());
-			if (checkCode == false) {
-				System.out.println("Verkeerde code. Probeer het nog een keer");
-			}
-			for (int i=0; i<4; i++) {
-				checkLetter = ci.checkLetter(ingaveCharArray[i], code[i]);
-				if (checkLetter == true) {
-					System.out.println("De " + (i+1) + "e letter is correct.");
+			switch(ingave) {
+			case "q":
+				System.out.println("Het spel is over.");
+				System.exit(0);
+				break;
+			default:
+				char[] ingaveCharArray = ci.ingaveNaarChar(ingave);
+				checkCode = ci.checkCode(ingave, cm.code());
+				for (int i=0; i<ingaveCharArray.length; i++) {
+					checkLetter = ci.checkLetter(ingaveCharArray[i], code[i]);
+					if (checkLetter == true) {
+						aantalCorrecteLetters++;
+					}
 				}
+				System.out.println(aantalCorrecteLetters +" letter(s) staan op de juiste plek.");
+				break;
 			}
 		}
 		System.out.println("Gefeliciteerd, je hebt de code gekraakt!");
