@@ -19,7 +19,10 @@ public class Mastermind {
 		while(checkCode == false) {
 			int aantalCorrecteLettersJuistePlek = 0;
 			int aantalLettersVerkeerdePlek = 0;
-			char[] codeKopie = code;
+			char[] codeKopie = new char[4];
+			for (int i = 0; i<codeKopie.length;i++) {
+				codeKopie[i] = code[i];
+			}
 			ingave = scanner.nextLine();
 			switch(ingave) {
 			case "q":
